@@ -11,3 +11,12 @@
 *.lai
 *.la
 *.a
+
+# Header and Source File
+*.h
+*.hpp
+*.c
+*.cpp
+
+# Git File
+*.gitignore
