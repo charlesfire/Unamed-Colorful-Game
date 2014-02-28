@@ -1,5 +1,6 @@
 #include "Game.hpp"
 #include "AABB.hpp"
+#include "TileMap.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -10,8 +11,15 @@ int main()
     myGame->Run();
     return 0;*/
 
-    sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
-    window.setFramerateLimit(15);
+    TileMap myMap;
+    sf::Image tileChart, tiles, compressedMapImage;
+    tileChart.loadFromFile("TileChart.png");
+    tiles.loadFromFile("Tiles.png");
+    compressedMapImage.loadFromFile("map.png");
+    myMap.buildTileMap(tileChart, tiles, compressedMapImage);
+
+    sf::RenderWindow window(sf::VideoMode(1366, 768), "My window");
+    window.setFramerateLimit(30.f);
 
     sf::RectangleShape staticShape, mouseFolowingShape;
     staticShape.setFillColor(sf::Color::Cyan);
@@ -23,7 +31,9 @@ int main()
     mouseFolowingShape.setSize(sf::Vector2f(75.f, 75.f));
 
     AABB staticShapeBox(window.getSize().x/2, window.getSize().y/2, 50.f, 50.f);
-    AABB mouseFolowingShapeBox(window.getSize().x/2, 0.f, 75.f, 75.f);
+    AABB mouseFolowingShapeBox(0.f, 0.f, 75.f, 75.f);
+
+    sf::Vector2f lastPos(0.f, 0.f);
 
     // on fait tourner le programme jusqu'à ce que la fenêtre soit fermée
     while (window.isOpen())
@@ -37,11 +47,11 @@ int main()
                 window.close();
         }
 
-        mouseFolowingShapeBox.m_position.y+=2.f;
+        lastPos=mouseFolowingShapeBox.m_position;
+        mouseFolowingShapeBox.m_position=(sf::Vector2f)sf::Mouse::getPosition();
         if(mouseFolowingShapeBox.isColliding(staticShapeBox))
         {
-            mouseFolowingShapeBox.m_position+=staticShapeBox.getMaximumDisplacement(mouseFolowingShapeBox, sf::Vector2f(0.f, 2.f));
-            mouseFolowingShapeBox.m_position.y-=2.f;
+            staticShapeBox.getMaximumDisplacement(mouseFolowingShapeBox, mouseFolowingShapeBox.m_position-lastPos);
             mouseFolowingShape.setFillColor(sf::Color::Red);
         }
         else
@@ -52,6 +62,7 @@ int main()
 
         window.clear(sf::Color::Black);
 
+        window.draw(myMap);
         window.draw(staticShape);
         window.draw(mouseFolowingShape);
 
