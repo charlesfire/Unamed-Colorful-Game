@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Unnamed Color Game" />
+		<Option title="Unnamed Colorful Game" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -69,10 +69,20 @@
 		<Unit filename="AABB.hpp" />
 		<Unit filename="BigFile.cpp" />
 		<Unit filename="BigFile.hpp" />
+		<Unit filename="DynamicPhysicObject.cpp" />
+		<Unit filename="DynamicPhysicObject.hpp" />
+		<Unit filename="Engine.cpp" />
+		<Unit filename="Engine.hpp" />
 		<Unit filename="Game.cpp" />
 		<Unit filename="Game.hpp" />
 		<Unit filename="Map.cpp" />
 		<Unit filename="Map.hpp" />
+		<Unit filename="PhysicEngine.cpp" />
+		<Unit filename="PhysicEngine.hpp" />
+		<Unit filename="PhysicObject.cpp" />
+		<Unit filename="PhysicObject.hpp" />
+		<Unit filename="StaticPhysicObject.cpp" />
+		<Unit filename="StaticPhysicObject.hpp" />
 		<Unit filename="TileMap.cpp" />
 		<Unit filename="TileMap.hpp" />
 		<Unit filename="VirtualFile.cpp" />

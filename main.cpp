@@ -2,6 +2,7 @@
 #include "AABB.hpp"
 #include "TileMap.hpp"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 
 int main()
@@ -15,7 +16,7 @@ int main()
     sf::Image tileChart, tiles, compressedMapImage;
     tileChart.loadFromFile("TileChart.png");
     tiles.loadFromFile("Tiles.png");
-    compressedMapImage.loadFromFile("map.png");
+    compressedMapImage.loadFromFile("Antoine.png");
     myMap.buildTileMap(tileChart, tiles, compressedMapImage);
 
     sf::RenderWindow window(sf::VideoMode(1366, 768), "My window");
