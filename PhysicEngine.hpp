@@ -1,17 +1,26 @@
 #ifndef PHYSICENGINE_HPP
 #define PHYSICENGINE_HPP
 
-#include "Engine.hpp"
+#include <map>
+#include "Singleton.hpp"
 
+class PhysicObject;
+class DynamicAABB;
+class AABB;
 
-/*class PhysicEngine : public Engine
+class PhysicEngine : public Singleton<PhysicEngine>
 {
+    friend class Singleton<PhysicEngine>;
     public:
-        PhysicEngine();
         virtual ~PhysicEngine();
-        virtual void setup();
-        virtual void update(float elapsedTime);
+        void setup();
+        void update(float elapsedTime);
+        void addDynamicBoxToObject(PhysicObject* object, DynamicAABB* boundingBox);
+        void addStaticBoxToObject(PhysicObject* object, AABB* boundingBox);
     protected:
-};*/
+        PhysicEngine();
+        std::multimap<PhysicObject*, DynamicAABB*> m_dynamicEntities;
+        std::multimap<PhysicObject*, AABB*> m_physicEntities;
+};
 
 #endif // PHYSICENGINE_HPP

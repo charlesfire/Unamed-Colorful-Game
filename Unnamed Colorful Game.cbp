@@ -23,9 +23,9 @@
 				<Linker>
 					<Add library="sfml-graphics-d" />
 					<Add library="sfml-window-d" />
-					<Add library="sfml-system-d" />
 					<Add library="sfml-audio-d" />
 					<Add library="sfml-network-d" />
+					<Add library="sfml-system-d" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -46,9 +46,9 @@
 					<Add option="-s" />
 					<Add library="sfml-graphics" />
 					<Add library="sfml-window" />
-					<Add library="sfml-system" />
 					<Add library="sfml-audio" />
 					<Add library="sfml-network" />
+					<Add library="sfml-system" />
 				</Linker>
 			</Target>
 		</Build>
@@ -61,7 +61,12 @@
 			<Add option="-fexceptions" />
 			<Add option="-DSFML_STATIC" />
 			<Add directory="C:/Program Files (x86)/CodeBlocks/SFML-2.1/include" />
+			<Add directory="C:/Program Files (x86)/CodeBlocks/sfml-tmxloader-master/include/pugixml" />
+			<Add directory="C:/Program Files (x86)/CodeBlocks/sfml-tmxloader-master/include/tmx" />
 		</Compiler>
+		<ResourceCompiler>
+			<Add directory="C:/Program Files (x86)/CodeBlocks/sfml-tmxloader-master/src" />
+		</ResourceCompiler>
 		<Linker>
 			<Add directory="C:/Program Files (x86)/CodeBlocks/SFML-2.0/lib" />
 		</Linker>
@@ -69,10 +74,8 @@
 		<Unit filename="AABB.hpp" />
 		<Unit filename="BigFile.cpp" />
 		<Unit filename="BigFile.hpp" />
-		<Unit filename="DynamicPhysicObject.cpp" />
-		<Unit filename="DynamicPhysicObject.hpp" />
-		<Unit filename="Engine.cpp" />
-		<Unit filename="Engine.hpp" />
+		<Unit filename="DynamicAABB.cpp" />
+		<Unit filename="DynamicAABB.hpp" />
 		<Unit filename="Game.cpp" />
 		<Unit filename="Game.hpp" />
 		<Unit filename="Map.cpp" />
@@ -81,8 +84,13 @@
 		<Unit filename="PhysicEngine.hpp" />
 		<Unit filename="PhysicObject.cpp" />
 		<Unit filename="PhysicObject.hpp" />
-		<Unit filename="StaticPhysicObject.cpp" />
-		<Unit filename="StaticPhysicObject.hpp" />
+		<Unit filename="Player.cpp" />
+		<Unit filename="Player.hpp" />
+		<Unit filename="Singleton.hpp" />
+		<Unit filename="TestingObject.cpp" />
+		<Unit filename="TestingObject.hpp" />
+		<Unit filename="TextureManager.cpp" />
+		<Unit filename="TextureManager.hpp" />
 		<Unit filename="TileMap.cpp" />
 		<Unit filename="TileMap.hpp" />
 		<Unit filename="VirtualFile.cpp" />

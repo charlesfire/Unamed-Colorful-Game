@@ -3,10 +3,17 @@
 
 #include <vector>
 #include <array>
+#include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
+#include "PhysicObject.hpp"
 
-class TileMap : public sf::Drawable
+namespace sf
+{
+    class Image;
+}
+
+class TileMap : public sf::Drawable, public PhysicObject
 {
     public:
         TileMap();
@@ -17,7 +24,6 @@ class TileMap : public sf::Drawable
     protected:
         sf::Texture m_tileTexture;
         sf::VertexArray m_tiles;
-        std::vector<std::vector<sf::Uint8>> m_tileCollidingFlag;
 };
 
 #endif // TILEMAP_HPP

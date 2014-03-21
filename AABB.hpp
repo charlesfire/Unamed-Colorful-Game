@@ -10,9 +10,12 @@ class AABB
 {
     public:
         AABB();
-        AABB(sf::Vector2f& position, sf::Vector2f& dimension);
+        AABB(const AABB& other);
+        AABB(sf::Vector2f position, sf::Vector2f dimension);
         AABB(float x, float y, float width, float height);
         virtual ~AABB();
+        bool isColliding(const AABB& boundingBox)const;
+
         sf::Vector2f m_position, m_dimension;
         CollisionFlag m_flag;
 };
