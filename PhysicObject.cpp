@@ -10,7 +10,7 @@ PhysicObject::~PhysicObject()
     //dtor
 }
 
-void PhysicObject::onColliding(PhysicObject* other)
+void PhysicObject::onColliding(const PhysicObject* other, const AABB* otherBox)
 {
 
 }

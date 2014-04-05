@@ -10,7 +10,7 @@ class PhysicObject
     public:
         PhysicObject();
         virtual ~PhysicObject();
-        virtual void onColliding(PhysicObject* other);
+        virtual void onColliding(const PhysicObject* other, const AABB* otherBox);
         virtual void onPositionUpdate(AABB* selfBox);
 };
 

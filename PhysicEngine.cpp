@@ -1,6 +1,7 @@
 #include "PhysicEngine.hpp"
 
 #include <SFML/System/Vector2.hpp>
+#include <iostream>
 #include "PhysicObject.hpp"
 #include "DynamicAABB.hpp"
 
@@ -21,6 +22,10 @@ void PhysicEngine::setup()
 
 void PhysicEngine::update(float elapsedTime)
 {
+    std::map<float, std::pair<PhysicObject*, AABB*>> collisionList;
+    #ifdef __DEBUG__
+        int nbrOfCollision(0);
+    #endif
     for(std::map<PhysicObject*, DynamicAABB*>::iterator it(m_dynamicEntities.begin()); it!=m_dynamicEntities.end(); ++it)
     {
         //update position
@@ -31,18 +36,32 @@ void PhysicEngine::update(float elapsedTime)
         it->second->m_velocity.y+=it->second->m_acceleration.y*elapsedTime;
 
         //collision testing
+        collisionList.clear();
         for(std::map<PhysicObject*, AABB*>::iterator it2(m_physicEntities.begin()); it2!=m_physicEntities.end(); ++it2)
         {
             if((it->second!=it2->second)&&(it->second->isColliding(*it2->second)))
             {
-                it->second->moveOut(*it2->second);
-                it->first->onColliding(it2->first);
-                it2->first->onColliding(it->first);
+                #ifdef __DEBUG__
+                    nbrOfCollision++;
+                #endif
+                collisionList.insert(std::pair<float, std::pair<PhysicObject*, AABB*>>((it->second->m_position.x-it2->second->m_position.x)*(it->second->m_position.x-it2->second->m_position.x)+(it->second->m_position.y-it2->second->m_position.y)*(it->second->m_position.y-it2->second->m_position.y), *it2));
+            }
+        }
+        for(std::map<float, std::pair<PhysicObject*, AABB*>>::iterator it2(collisionList.begin()); it2!=collisionList.end(); ++it2)
+        {
+            if((it->second->isColliding(*it2->second.second)))
+            {
+                it->second->moveOut(*it2->second.second);
+                it->first->onColliding(it2->second.first, it2->second.second);
+                it2->second.first->onColliding(it->first, it->second);
             }
         }
         //update visual position
         it->first->onPositionUpdate(it->second);
     }
+    #ifdef __DEBUG__
+        std::cout<<"nbr of collisions: "<<nbrOfCollision<<std::endl;
+    #endif
 }
 
 void PhysicEngine::addDynamicBoxToObject(PhysicObject* object, DynamicAABB* boundingBox)

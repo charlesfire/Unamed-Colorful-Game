@@ -6,6 +6,8 @@
 
 enum CollisionFlag : sf::Uint8{solid1, solid2, damage1, damage2};
 
+enum CollisionOrientation{Top, Bottom, Right, Left};
+
 class AABB
 {
     public:
@@ -15,6 +17,7 @@ class AABB
         AABB(float x, float y, float width, float height);
         virtual ~AABB();
         bool isColliding(const AABB& boundingBox)const;
+        CollisionOrientation getCollisionOrientation(const AABB& other)const;
 
         sf::Vector2f m_position, m_dimension;
         CollisionFlag m_flag;

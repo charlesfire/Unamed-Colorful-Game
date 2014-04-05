@@ -1,13 +1,15 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include "TestingObject.hpp"
 #include "PhysicEngine.hpp"
 #include "TileMap.hpp"
+#include "Player.hpp"
 
 int main()
 {
     PhysicEngine* eng(PhysicEngine::getInstance());
     sf::Clock clock;
-    TestingObject obj1(sf::Vector2f(0.f, 0.f), sf::Vector2f(64.f, 64.f), sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 156.8f));
+    Player myPlayer;
 
     sf::Image tileChart, tiles, compressedMapImage;
     tileChart.loadFromFile("TileChart.png");
@@ -16,7 +18,8 @@ int main()
     TileMap myMap;
     myMap.buildTileMap(tileChart, tiles, compressedMapImage);
 
-    sf::RenderWindow window(sf::VideoMode(1366, 768), "My window");
+    sf::RenderWindow window(sf::VideoMode(1200, 600), "My window");
+    window.setFramerateLimit(60.f);
 
     // on fait tourner le programme jusqu'à ce que la fenêtre soit fermée
     while (window.isOpen())
@@ -31,12 +34,13 @@ int main()
         }
 
         eng->update(clock.getElapsedTime().asSeconds());
+        std::cout<<"fps: "<<1.f/clock.getElapsedTime().asSeconds()<<std::endl;
         clock.restart();
 
         window.clear(sf::Color::Black);
 
         window.draw(myMap);
-        window.draw(obj1);
+        window.draw(myPlayer);
 
         window.display();
     }

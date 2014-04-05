@@ -35,3 +35,15 @@ bool AABB::isColliding(const AABB& other)const
    else
           return true;
 }
+
+CollisionOrientation AABB::getCollisionOrientation(const AABB& other)const
+{
+    if(other.m_position.x >= m_position.x + m_dimension.x)
+        return CollisionOrientation::Right;
+    else if(other.m_position.x + other.m_dimension.x <= m_position.x)
+        return CollisionOrientation::Left;
+    else if(other.m_position.y >= m_position.y + m_dimension.y)
+        return CollisionOrientation::Bottom;
+    else
+        return CollisionOrientation::Top;
+}
