@@ -43,7 +43,8 @@ bool TileMap::buildTileMap(sf::Image& tileChart, sf::Image& tiles, sf::Image& co
 
             if(colorBuffer!=sf::Color(0.f, 0.f, 0.f, 0.f))
             {
-                engine->addStaticBoxToObject(this, new AABB(sf::Vector2f(i*tileSize, j*tileSize), sf::Vector2f(tileSize, tileSize)));
+                if(colorBuffer.a!=0.f)
+                    engine->addStaticBoxToObject(this, std::shared_ptr<AABB>(new AABB(sf::Vector2f(i*tileSize, j*tileSize), sf::Vector2f(tileSize, tileSize), (CollisionFlags)colorBuffer.a)));
                 for(unsigned int h(0); h<tileChartSize; h++)
                 {
                     if(tileChart.getPixel(h, 0)==colorBuffer)

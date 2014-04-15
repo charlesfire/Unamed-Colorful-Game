@@ -4,9 +4,15 @@
 #include "PhysicEngine.hpp"
 #include "TileMap.hpp"
 #include "Player.hpp"
+#include "AABB.hpp"
 
 int main()
 {
+    /*CollisionFlags flags1, flags2;
+    flags1=(CollisionFlags)(CollisionFlags::solidPurple|CollisionFlags::solidGreen);
+    flags2=(CollisionFlags)(CollisionFlags::solidPurple|CollisionFlags::solidGreen);
+    if((flags1&flags2))
+        std::cout<<(int)((flags1&flags2)&CollisionFlags::solidGreen);*/
     PhysicEngine* eng(PhysicEngine::getInstance());
     sf::Clock clock;
     Player myPlayer;
@@ -21,14 +27,12 @@ int main()
     sf::RenderWindow window(sf::VideoMode(1200, 600), "My window");
     window.setFramerateLimit(60.f);
 
-    // on fait tourner le programme jusqu'à ce que la fenêtre soit fermée
     while (window.isOpen())
     {
-        // on inspecte tous les évènements de la fenêtre qui ont été émis depuis la précédente itération
         sf::Event event;
         while (window.pollEvent(event))
         {
-            // évènement "fermeture demandée" : on ferme la fenêtre
+            myPlayer.handleEvent(event);
             if (event.type == sf::Event::Closed)
                 window.close();
         }

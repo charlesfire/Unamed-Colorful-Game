@@ -1,7 +1,6 @@
 #include "Game.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Vector2.hpp>
-#include <windows.h>
 
 Game::Game() : m_window()
 {
@@ -23,7 +22,6 @@ void Game::Setup()
     splashScreenSprite.setTexture(splashScreenTexture);
     m_window.draw(splashScreenSprite);
     m_window.display();
-    Sleep(5000);
     m_window.setSize(sf::Vector2u(640, 320));
 }
 

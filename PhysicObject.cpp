@@ -10,12 +10,12 @@ PhysicObject::~PhysicObject()
     //dtor
 }
 
-void PhysicObject::onColliding(const PhysicObject* other, const AABB* otherBox)
+void PhysicObject::onColliding(const PhysicObject* other, const std::shared_ptr<AABB>& otherBox)
 {
 
 }
 
-void PhysicObject::onPositionUpdate(AABB* selfBox)
+void PhysicObject::onPositionUpdate(std::shared_ptr<AABB> selfBox)
 {
 
 }

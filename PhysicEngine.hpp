@@ -2,6 +2,7 @@
 #define PHYSICENGINE_HPP
 
 #include <map>
+#include <memory>
 #include "Singleton.hpp"
 
 class PhysicObject;
@@ -15,12 +16,12 @@ class PhysicEngine : public Singleton<PhysicEngine>
         virtual ~PhysicEngine();
         void setup();
         void update(float elapsedTime);
-        void addDynamicBoxToObject(PhysicObject* object, DynamicAABB* boundingBox);
-        void addStaticBoxToObject(PhysicObject* object, AABB* boundingBox);
+        void addDynamicBoxToObject(PhysicObject* object, std::shared_ptr<DynamicAABB> boundingBox);
+        void addStaticBoxToObject(PhysicObject* object, std::shared_ptr<AABB> boundingBox);
     protected:
         PhysicEngine();
-        std::multimap<PhysicObject*, DynamicAABB*> m_dynamicEntities;
-        std::multimap<PhysicObject*, AABB*> m_physicEntities;
+        std::multimap<PhysicObject*, std::shared_ptr<DynamicAABB>> m_dynamicEntities;
+        std::multimap<PhysicObject*, std::shared_ptr<AABB>> m_physicEntities;
 };
 
 #endif // PHYSICENGINE_HPP
