@@ -32,7 +32,7 @@ void Player::handleEvent(const sf::Event& event)
     }
 }
 
-void Player::onPositionUpdate(std::shared_ptr<AABB> selfBox)
+void Player::onPositionUpdate(std::shared_ptr<AABB> selfBox, float elapsedTime)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
@@ -56,9 +56,7 @@ void Player::onPositionUpdate(std::shared_ptr<AABB> selfBox)
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::R))
     {
-        m_box->m_position.x=0.f;
-        m_box->m_position.y=0.f;
-        m_box->m_velocity.y=0.f;
+        std::cout<<m_box->m_velocity.y<<std::endl;
     }
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)&&m_onGround==true)
@@ -71,7 +69,10 @@ void Player::onPositionUpdate(std::shared_ptr<AABB> selfBox)
 void Player::onColliding(const PhysicObject* other, const std::shared_ptr<AABB>& otherBox)
 {
     if(otherBox->getCollisionOrientation(*m_box)==CollisionOrientation::Top)
+    {
         m_onGround=true;
+        m_box->m_velocity.y=0.f;
+    }
     else if(otherBox->getCollisionOrientation(*m_box)==CollisionOrientation::Bottom)
         m_box->m_velocity.y=0.f;
     else
@@ -81,4 +82,9 @@ void Player::onColliding(const PhysicObject* other, const std::shared_ptr<AABB>&
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states)const
 {
     target.draw(m_sprite);
+}
+
+sf::Vector2f Player::getPosition()const
+{
+    return m_box->m_position;
 }

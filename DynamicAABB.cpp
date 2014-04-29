@@ -45,5 +45,4 @@ void DynamicAABB::moveOut(AABB& other)
         minimumDisplacement.y=0.f;
 
     m_position-=minimumDisplacement;
-    m_velocity-=minimumDisplacement;
 }

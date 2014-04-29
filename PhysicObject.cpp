@@ -15,7 +15,7 @@ void PhysicObject::onColliding(const PhysicObject* other, const std::shared_ptr<
 
 }
 
-void PhysicObject::onPositionUpdate(std::shared_ptr<AABB> selfBox)
+void PhysicObject::onPositionUpdate(std::shared_ptr<AABB> selfBox, float elapsedTime)
 {
 
 }

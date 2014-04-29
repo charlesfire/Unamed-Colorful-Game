@@ -20,10 +20,11 @@ class TileMap : public sf::Drawable, public PhysicObject
         TileMap(sf::Image& tileChart, sf::Image& tiles, sf::Image& compressedMapImage);
         virtual ~TileMap();
         virtual bool buildTileMap(sf::Image& tileChart, sf::Image& tiles, sf::Image& compressedMapImage);
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states)const;
     protected:
         sf::Texture m_tileTexture;
         sf::VertexArray m_tiles;
+
+        virtual void draw(sf::RenderTarget& target, sf::RenderStates states)const;
 };
 
 #endif // TILEMAP_HPP

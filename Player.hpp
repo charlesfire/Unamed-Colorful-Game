@@ -17,14 +17,15 @@ class Player : public sf::Drawable, public PhysicObject
         Player();
         virtual ~Player();
         void handleEvent(const sf::Event& event);
-        void onPositionUpdate(std::shared_ptr<AABB> selfBox);
+        void onPositionUpdate(std::shared_ptr<AABB> selfBox, float elapsedTime);
         void onColliding(const PhysicObject* other, const std::shared_ptr<AABB>& otherBox);
-        void draw(sf::RenderTarget& target, sf::RenderStates states)const;
+        sf::Vector2f getPosition()const;
     protected:
         sf::Sprite m_sprite;
-        sf::Vector2f m_lastPosition;
         std::shared_ptr<DynamicAABB> m_box;
         bool m_onGround;
+
+        void draw(sf::RenderTarget& target, sf::RenderStates states)const;
 };
 
 #endif // PLAYER_HPP

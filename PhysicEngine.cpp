@@ -50,7 +50,7 @@ void PhysicEngine::update(float elapsedTime)
             }
         }
         //update visual position
-        it->first->onPositionUpdate(it->second);
+        it->first->onPositionUpdate(it->second, elapsedTime);
     }
 }
 

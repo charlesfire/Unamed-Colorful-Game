@@ -12,7 +12,7 @@ class PhysicObject
         PhysicObject();
         virtual ~PhysicObject();
         virtual void onColliding(const PhysicObject* other, const std::shared_ptr<AABB>& otherBox);
-        virtual void onPositionUpdate(std::shared_ptr<AABB> selfBox);
+        virtual void onPositionUpdate(std::shared_ptr<AABB> selfBox, float elapsedTime);
 };
 
 #endif // PHYSICOBJECT_HPP
