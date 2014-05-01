@@ -7,7 +7,7 @@
 #include "PhysicEngine.hpp"
 #include "TextureManager.hpp"
 
-Player::Player() : m_sprite(), m_box(new DynamicAABB(32.f, 0.f, 32.f, 64.f, 0.f, 0.f, 0.f, 1000.f, (CollisionFlags)(CollisionFlags::solidGreen))), m_onGround(false), m_isPurple(true), m_isMovingRight(true), m_isDead(false)
+Player::Player() : m_sprite(), m_box(new DynamicAABB(0.f, 0.f, 32.f, 64.f, 0.f, 0.f, 0.f, 1000.f, (CollisionFlags)(CollisionFlags::solidGreen))), m_onGround(false), m_isPurple(true), m_isMovingRight(true), m_isDead(false)
 {
     m_sprite.setTexture(TextureManager::getInstance()->getTexture("Player.png"));
 
