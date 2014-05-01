@@ -4,7 +4,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Config.hpp>
 
-enum CollisionFlags : sf::Uint8{noCollision=0, solidGreen=64, solidPurple=128};
+enum CollisionFlags : sf::Uint8{noCollision=0, endGame=8, hurtWhenGreen=16, hurtWhenPurple=32, solidGreen=64, solidPurple=128};
 
 enum CollisionOrientation{Top, Bottom, Right, Left};
 

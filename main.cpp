@@ -1,21 +1,19 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
-#include <sstream>
+//#include <iostream>
+//#include <sstream>
 #include "TextureManager.hpp"
 #include "PhysicEngine.hpp"
 #include "TileMap.hpp"
 #include "Player.hpp"
+#include "Key.hpp"
 #include "AnimatedSprite.hpp"
 
 int main()
 {
-    /*AnimatedSprite anim("pizza", {sf::IntRect(0, 0, 32, 32), sf::IntRect(32, 0, 32, 32), sf::IntRect(64, 0, 32, 32)});
-    anim.playAnimation("pizza", 1);
-    anim.setTexture(TextureManager::getInstance()->getTexture("TestAnim.png"));*/
-
     bool hasFocus(true);
     PhysicEngine* eng(PhysicEngine::getInstance());
     Player myPlayer;
+    Key myKey;
 
     sf::Image tileChart, tiles, compressedMapImage;
     tileChart.loadFromFile("TileChart.png");
@@ -24,13 +22,13 @@ int main()
     TileMap myMap;
     myMap.buildTileMap(tileChart, tiles, compressedMapImage);
 
-    sf::RenderWindow window(sf::VideoMode(1200, 600), "My window");
-    window.setFramerateLimit(60.f);
+    sf::RenderWindow window(sf::VideoMode(1366, 768), "Unnamed Colorful Game", sf::Style::Fullscreen);
+    //window.setFramerateLimit(240.f);
     sf::View myView(window.getDefaultView());
 
     sf::Clock clock;
 
-    while (window.isOpen())
+    while(window.isOpen()&&hasFocus&&!myPlayer.isDead())
     {
         sf::Event event;
         while (window.pollEvent(event))
@@ -39,31 +37,28 @@ int main()
                 hasFocus=true;
             else if (event.type == sf::Event::LostFocus)
                 hasFocus==false;
-            else if (event.type == sf::Event::Closed)
+            else if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
                 window.close();
             else
                 myPlayer.handleEvent(event);
         }
 
-        if(hasFocus)
-        {
-            eng->update(clock.getElapsedTime().asSeconds());
-            anim.update(clock.getElapsedTime().asSeconds());
-            std::stringstream ss;
-            ss<<"Fps: "<<1.f/clock.restart().asSeconds();
-            window.setTitle(ss.str());
+        myKey.update(clock.getElapsedTime().asSeconds());
+        eng->update(clock.restart().asSeconds());
+        //std::stringstream ss;
+        //ss<<"Fps: "<<1.f/clock.restart().asSeconds();
+        //window.setTitle(ss.str());
 
-            myView.setCenter(myPlayer.getPosition());
-            window.setView(myView);
+        myView.setCenter(myPlayer.getPosition());
+        window.setView(myView);
 
-            window.clear(sf::Color::Black);
+        window.clear(sf::Color::Black);
 
-            window.draw(myMap);
-            window.draw(myPlayer);
-            window.draw(anim);
+        window.draw(myMap);
+        window.draw(myPlayer);
+        window.draw(myKey);
 
-            window.display();
-        }
+        window.display();
     }
     return 0;
 }

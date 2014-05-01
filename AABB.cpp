@@ -28,12 +28,10 @@ AABB::~AABB()
 
 bool AABB::isColliding(const AABB& other)const
 {
-    if((!((other.m_flags&CollisionFlags::solidGreen)&m_flags)
-        && !((other.m_flags&CollisionFlags::solidPurple)&m_flags))
-        || ((other.m_position.x >= m_position.x + m_dimension.x)
+    if((other.m_position.x >= m_position.x + m_dimension.x)
         || (other.m_position.x + other.m_dimension.x <= m_position.x)
         || (other.m_position.y >= m_position.y + m_dimension.y)
-        || (other.m_position.y + other.m_dimension.y <= m_position.y)))
+        || (other.m_position.y + other.m_dimension.y <= m_position.y))
           return false;
    else
           return true;

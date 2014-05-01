@@ -44,7 +44,8 @@ void PhysicEngine::update(float elapsedTime)
         {
             if((it->second->isColliding(*it2->second.second)))
             {
-                it->second->moveOut(*it2->second.second);
+                if(((it->second->m_flags&CollisionFlags::solidGreen)&it2->second.second->m_flags) || ((it->second->m_flags&CollisionFlags::solidPurple)&it2->second.second->m_flags))
+                    it->second->moveOut(*it2->second.second);
                 it->first->onColliding(it2->second.first, it2->second.second);
                 it2->second.first->onColliding(it->first, it->second);
             }
